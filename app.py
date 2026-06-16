@@ -37,6 +37,7 @@ def init_db():
     conn.close()
 
 init_db()
+
 def create_chat_session():
 
     conn = sqlite3.connect("chat.db")
@@ -97,6 +98,7 @@ def get_messages():
 
     return messages
 
+create_chat_session()
 API_KEY = os.getenv("GEMINI_API_KEY")
 genai.configure(api_key=API_KEY)
 model = genai.GenerativeModel("gemini-2.5-flash")
