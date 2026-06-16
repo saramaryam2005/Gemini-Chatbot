@@ -37,6 +37,39 @@ def init_db():
     conn.close()
 
 init_db()
+def create_chat_session():
+
+    conn = sqlite3.connect("chat.db")
+
+    cursor = conn.cursor()
+
+    cursor.execute(
+        "INSERT INTO chat_sessions DEFAULT VALUES"
+    )
+
+    conn.commit()
+
+    session_id = cursor.lastrowid
+
+    conn.close()
+
+    return session_id
+
+def get_chat_sessions():
+
+    conn = sqlite3.connect("chat.db")
+
+    cursor = conn.cursor()
+
+    cursor.execute(
+        "SELECT id FROM chat_sessions ORDER BY id DESC"
+    )
+
+    sessions = cursor.fetchall()
+
+    conn.close()
+
+    return sessions
 def get_messages():
 
     conn = sqlite3.connect("chat.db")
