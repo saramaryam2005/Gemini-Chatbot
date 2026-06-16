@@ -142,20 +142,6 @@ Chat Interface
 
 ---
 
-## 🔐 Security Notes
-
-The `.env` file contains your API key and should never be uploaded to GitHub.
-
-Create a `.gitignore` file:
-
-```text
-venv/
-.env
-__pycache__/
-*.pyc
-```
-
----
 
 ## 🎯 Future Improvements
 
