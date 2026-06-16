@@ -15,20 +15,27 @@ def init_db():
     cursor = conn.cursor()
 
     cursor.execute("""
-    CREATE TABLE IF NOT EXISTS messages (
+    CREATE TABLE IF NOT EXISTS chat_sessions(
 
-        id INTEGER PRIMARY KEY AUTOINCREMENT,
-
-        sender TEXT,
-
-        text TEXT
+        id INTEGER PRIMARY KEY AUTOINCREMENT
 
     )
     """)
 
-    conn.commit()
+    cursor.execute("""
+    CREATE TABLE IF NOT EXISTS messages(
 
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+
+        session_id INTEGER,
+
+        sender TEXT,
+
+        text TEXT)""")
+
+    conn.commit()
     conn.close()
+
 init_db()
 def get_messages():
 
