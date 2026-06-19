@@ -1,44 +1,106 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
     <title>Gemini Chatbot</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='style.css') }}">
+
 </head>
+
 <body>
 
     <div class="container">
 
-        <h1>🤖 Gemini Chatbot</h1>
-        <div class="chat-box">
+        <!-- Sidebar -->
+        <div class="sidebar">
 
-    {% for message in messages %}
+            <h2>🤖 Gemini</h2>
 
-        <div class="message {{ message.sender }}">
+            <a href="/new_chat" class="new-chat-btn">
+                ➕ New Chat
+            </a>
 
-            {{ message.text }}
+            <div class="chat-list">
+
+                {% for s in sessions %}
+                
+                <div class="chat-item">
+                
+                    <a href="/chat/{{ s[0] }}" class="chat-link">
+                        Chat {{ s[0] }}
+                    </a>
+                
+                    <a href="/delete_chat/{{ s[0] }}" class="delete-btn">
+                        🗑️
+                    </a>
+                
+                </div>
+                
+                {% endfor %}
+            </div>
 
         </div>
 
-    {% endfor %}
+        <!-- Main Chat Area -->
+        <div class="chat-area">
 
-</div>
+            <div class="chat-header">
 
-        
-    </div>
-        
+                <h2>Gemini AI Chatbot</h2>
 
-        <form action="/chat" method="POST">
-            <input
-                type="text"
-                name="message"
-                placeholder="Ask me anything..."
-                required>
+            </div>
 
-            <button type="submit">
-                Send
-            </button>
+            <div class="chat-box">
 
-        </form>
+                {% if messages %}
+
+                    {% for message in messages %}
+
+                        <div class="message {{ message.sender }}">
+
+                            {{ message.text }}
+
+                        </div>
+
+                    {% endfor %}
+
+                {% else %}
+
+                    <div class="welcome">
+
+                        <h2>👋 Welcome</h2>
+
+                        <p>
+                            Ask me anything using Gemini AI.
+                        </p>
+
+                    </div>
+
+                {% endif %}
+
+            </div>
+
+            <form action="/chat" method="POST">
+
+                <input
+                    type="text"
+                    name="message"
+                    placeholder="Ask Gemini anything..."
+                    required>
+
+                <button type="submit">
+                    Send
+                </button>
+
+            </form>
+
+        </div>
 
     </div>
 
