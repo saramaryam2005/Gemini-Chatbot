@@ -19,6 +19,9 @@ RUN pip install --no-cache-dir --upgrade -r requirements.txt
 # Copy the rest of your application files into the container
 COPY --chown=user . .
 
+# FIX: Grant full read/write permissions to the app directory for SQLite
+RUN chmod -R 777 /home/user/app
+
 # Switch to the non-root user
 USER user
 
